@@ -226,51 +226,51 @@
           (parse-edges types)
           footer))))
 
+(comment
+  (require '[hodur-engine.core :as engine])
 
-(require '[hodur-engine.core :as engine])
+  (let [conn (engine/init-schema '[^{:graphviz/tag true}
+                                   default
+                                   
+                                   A
+                                   [^{:optional true} f1
+                                    ^{:type String
+                                      :optional true} f2
+                                    f3 [af1
+                                        ^C af2
+                                        ^{:type B
+                                          :cardinality n
+                                          :optional true}
+                                        af3]]
 
-(let [conn (engine/init-schema '[^{:graphviz/tag true}
-                                 default
-                                 
-                                 A
-                                 [^{:optional true} f1
-                                  ^{:type String
-                                    :optional true} f2
-                                  f3 [af1
-                                      ^C af2
-                                      ^{:type B
-                                        :cardinality n
-                                        :optional true}
-                                      af3]]
+                                   ^{:graphviz/color "navajowhite1"
+                                     :ble/tag-recursive true}
+                                   B
+                                   [^A f1]
 
-                                 ^{:graphviz/color "navajowhite1"
-                                   :ble/tag-recursive true}
-                                 B
-                                 [^A f1]
+                                   ^{:implements LaInterface}
+                                   C
+                                   []
 
-                                 ^{:implements LaInterface}
-                                 C
-                                 []
+                                   ^{:interface true}
+                                   LaInterface
+                                   []
 
-                                 ^{:interface true}
-                                 LaInterface
-                                 []
+                                   ^{:union true
+                                     :graphviz/group "group1"}
+                                   Lunion
+                                   [D E]
 
-                                 ^{:union true
-                                   :graphviz/group "group1"}
-                                 Lunion
-                                 [D E]
+                                   ^{:graphviz/group "group1"}
+                                   D
+                                   []
 
-                                 ^{:graphviz/group "group1"}
-                                 D
-                                 []
+                                   ^{:bla/tag true}
+                                   E
+                                   []
 
-                                 ^{:bla/tag true}
-                                 E
-                                 []
-
-                                 ^{:enum true}
-                                 Lenum
-                                 [is-this
-                                  is-that]])]
-  (println (schema conn {:tags [:ble]})))
+                                   ^{:enum true}
+                                   Lenum
+                                   [is-this
+                                    is-that]])]
+    (println (schema conn {:tags [:ble]}))))
