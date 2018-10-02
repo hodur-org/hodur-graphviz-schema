@@ -218,7 +218,6 @@
   ([conn]
    (schema conn nil))
   ([conn {:keys [groups tags]}]
-   (clojure.pprint/pprint (meta-query groups tags))
    (let [types (-> (meta-query groups tags)
                    (d/q @conn))]
      (str header
