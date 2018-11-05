@@ -96,21 +96,22 @@
 
 (defn ^:private edge-label-cardinality
   [[from to]]
-  (if (= from to) from (str from ".." to)))
+  (if (= from to) (str from) (str from ".." to)))
 
 (defn ^:private edge-label-name
   [name]
   (if name
-    (str "label=\"" name "\";")
+    (str "label=\" " name "\";")
     ""))
 
-(defn ^:private edge-label-headlabel
-  [cardinality]
-  (if cardinality
-    (str "headlabel=\""
-         (edge-label-cardinality cardinality)
-         "\";")
-    ""))
+(defn ^:private append-cardinality-label
+  [label cardinality]
+  (let [cardinality-str (edge-label-cardinality cardinality)]
+    (if (= cardinality-str "1")
+      label
+      (str label
+           (when label "\n")
+           cardinality-str))))
 
 (defn ^:private edge-label
   ([name src dst cardinality]
@@ -122,8 +123,7 @@
           (:type/name dst)
           " "
           "["
-          (edge-label-name name)
-          (edge-label-headlabel cardinality)
+          (edge-label-name (append-cardinality-label name cardinality))
           (if extra extra "")
           "]\n")
      "")))
