@@ -217,10 +217,10 @@
 (defn schema
   ([conn]
    (schema conn nil))
-  ([conn {:keys [groups tags]}]
+  ([conn {:keys [groups tags dpi]}]
    (let [types (-> (meta-query groups tags)
                    (d/q @conn))]
-     (str header
+     (str (string/replace header "$DPI" (str (or dpi 300)))
           (parse-nodes types)
           (parse-edges types)
           footer))))

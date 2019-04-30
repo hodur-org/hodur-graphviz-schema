@@ -1,7 +1,7 @@
 digraph G {
   fontname = "Bitstream Vera Sans"
   fontsize = 8
-  dpi = 300
+  dpi = $DPI
 
   node [
     fontname = "Bitstream Vera Sans"
