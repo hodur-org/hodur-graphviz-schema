@@ -1,0 +1,22 @@
+digraph G {
+  fontname = "Bitstream Vera Sans"
+  fontsize = 8
+  dpi = 300
+
+  node [
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    shape = "record"
+  ]
+
+  edge [
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    arrowhead = "open"
+    labelangle = 45
+    labeldistance = 1.1
+  ]
+Person [label="{Person|name: String\l}";fillcolor=navajowhite1;style=filled;]
+Business [label="{Business|total-revenue: String\l}";fillcolor=lightsalmon;style=filled;]
+
+}
