@@ -198,7 +198,19 @@ tags:
   (hodur-graphviz/schema meta-db {:tags [:sql]})
 ```
 
-Of coruse, both systems can be combined.
+Of course, both systems can be combined.
+
+## Extra options
+
+You may want to configure what DPI will be used when generating an
+image from dot file. Per default 300 dpi will be used, but you can set
+it:
+
+```clojure
+  (hodur-graphviz/schema meta-db {:dpi 600})
+```
+
+This will mark dot file to generate 600 dpi image files.
 
 ## Bugs
 

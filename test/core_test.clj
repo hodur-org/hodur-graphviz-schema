@@ -28,3 +28,11 @@
   (let [s-target (-> "color.dot" io/resource slurp)
         s-mine (-> color-schema engine/init-schema graphviz/schema)]
     (is (= s-target s-mine))))
+
+(deftest test-dpi
+  (let [s-target (-> "basic-150.dot" io/resource slurp)
+        s-mine (-> basic-schema engine/init-schema (graphviz/schema {:dpi 150}))]
+    (is (= s-target s-mine)))
+  (let [s-target (-> "basic-600.dot" io/resource slurp)
+        s-mine (-> basic-schema engine/init-schema (graphviz/schema {:dpi 600}))]
+    (is (= s-target s-mine))))
