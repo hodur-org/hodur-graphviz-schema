@@ -19,6 +19,20 @@
                     Business
                     [^String total-revenue]])
 
+(def grouping-schema '[^{:graphviz/tag-recursive true
+                         :graphviz/group "people"
+                         :foo/tag true
+                         :bar/tag true}
+                       Person
+                       [^String first-name
+                        ^String last-name]
+
+                       ^{:graphviz/tag-recursive true
+                         :graphviz/group "business"
+                         :foo/tag true}
+                       BusinessUnit
+                       [^String name]])
+
 (deftest test-basic
   (let [s-target (-> "basic.dot" io/resource slurp)
         s-mine (-> basic-schema engine/init-schema graphviz/schema)]
@@ -36,3 +50,38 @@
   (let [s-target (-> "basic-600.dot" io/resource slurp)
         s-mine (-> basic-schema engine/init-schema (graphviz/schema {:dpi 600}))]
     (is (= s-target s-mine))))
+
+(deftest test-grouping
+  (are [dot filter-map]
+      (let [s-target (-> dot io/resource slurp)
+            s-mine (-> grouping-schema
+                       engine/init-schema
+                       (graphviz/schema filter-map))]
+        (= s-target s-mine))
+    
+    "grouping-all.dot"
+    {:groups ["people" "business"]}
+
+    "grouping-all.dot"
+    {:tags [:foo]}
+
+    "grouping-all.dot"
+    {:groups ["business"] :tags [:bar]}
+
+    "grouping-all.dot"
+    {:tags [:foo :bar]}
+
+    "grouping-all.dot"
+    {:groups ["business"] :tags [:foo]}
+
+    "grouping-people.dot"
+    {:tags [:bar]}
+
+    "grouping-people.dot"
+    {:tags [:bar] :groups ["people"]}
+
+    "grouping-people.dot"
+    {:groups ["people"]}
+
+    "grouping-business.dot"
+    {:groups ["business"]}))

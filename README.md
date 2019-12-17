@@ -56,8 +56,8 @@ add `hodur/graphviz-schema`, a plugin that creates diagrams in
 GraphViz out of your model to the `deps.edn` file:
 
 ``` clojure
-  {:deps {hodur/engine          {:mvn/version "0.1.6"}
-          hodur/graphviz-schema {:mvn/version "0.1.0"}}}
+  {:deps {hodur/engine          {:mvn/version "0.1.7"}
+          hodur/graphviz-schema {:mvn/version "0.1.1"}}}
 ```
 
 You should `require` it any way you see fit:
@@ -189,16 +189,19 @@ one marked as part of the `"people-stuff"` group:
 ```
 
 Another situation is when you want to generate just what has been
-tagged for some other plugin. For instance, you want a diagram of all
-the entities that are going to be used by your SQL schema plugin. In
-that situation you can use the same map but specifying a collection of
+tagged for some plugin. For instance, you want a diagram of all the
+entities that are going to be used by your SQL schema plugin. In that
+situation you can use the same map but specifying a collection of
 tags:
 
 ``` clojure
   (hodur-graphviz/schema meta-db {:tags [:sql]})
 ```
 
-Of course, both systems can be combined.
+Of course, both systems can be mixed and matched. The system generates
+anything that hits (i.e. if an entity is tagged with `:foo` and
+another with `:bar` and you use `{:tags [:foo :bar]}`, both will be
+generated.
 
 ## Extra options
 

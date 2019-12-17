@@ -206,9 +206,12 @@
       (concat '[[?e :type/name]
                 [?e :type/nature :user]
                 [?e :graphviz/tag true]])
-      (concat (map (fn [g] ['?e :graphviz/group g]) groups))
-      (concat (map (fn [t] ['?e (keyword (name t) "tag") true]) tags))
-      vec))
+      vec
+      (#(if (or groups tags)
+          (conj % (apply list 'or
+                         (concat (map (fn [g] ['?e :graphviz/group g]) groups)
+                                 (map (fn [t] ['?e (keyword (name t) "tag") true]) tags))))
+          %))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Public functions
@@ -272,4 +275,26 @@
                                    Lenum
                                    [is-this
                                     is-that]])]
-    (println (schema conn {:tags [:ble]}))))
+    (println (schema conn {:tags [:bla]}))
+
+    #_(d/q '[:find
+             [(pull
+               ?e
+               [#:type{:implements [*]}
+                #:field{:_parent
+                        [#:field{:type [*]}
+                         #:field{:parent [*]}
+                         #:param{:_parent
+                                 [#:param{:type [*]}
+                                  #:param{:parent [#:field{:parent [*]} *]}
+                                  *]}
+                         *]}
+                *])
+              ...]
+             :where
+             [?e :type/name]
+             [?e :type/nature :user]
+             [?e :graphviz/tag true]
+             (or [?e :bla/tag true])]
+           @conn))
+  )
