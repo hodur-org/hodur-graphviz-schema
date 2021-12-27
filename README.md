@@ -145,12 +145,12 @@ You can select the color of a specific entity by using the marker
 
 ``` clojure
   [^{:graphviz/tag-recursive true
-  :graphviz/color "navajowhite1"}
+     :graphviz/color "navajowhite1"}
    Person
    [^String name]
 
    ^{:graphviz/tag-recursive true
-   :graphviz/color "lightsalmon"}
+     :graphviz/color "lightsalmon"}
    Business
    [^String total-revenue]]
 ```
@@ -169,12 +169,12 @@ of a certain group with the marker `:graphviz/group`:
 
 ``` clojure
   [^{:graphviz/tag-recursive true
-  :graphviz/group "people-stuff"}
+     :graphviz/group "people-stuff"}
    Person
    [^String name]
 
    ^{:graphviz/tag-recursive true
-   :graphviz/color "business-stuff"}
+     :graphviz/color "business-stuff"}
    Business
    [^String total-revenue]]
 ```
