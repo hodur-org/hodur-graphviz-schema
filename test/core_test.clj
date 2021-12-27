@@ -19,6 +19,31 @@
                     Business
                     [^String total-revenue]])
 
+(def stereotype-schema '[^{:graphviz/tag-recursive true
+                           :graphviz/stereotype "fact"}
+                         PersonEvent
+                         [^String name]
+
+                         ^{:graphviz/tag-recursive true
+                           :graphviz/stereotype "command"}
+                         RetractionEvent
+                         [^String id]
+
+                         ^{:interface true
+                           :graphviz/tag-recursive true}
+                         Node
+                         [^String id]
+
+                         ^{:enum true
+                           :graphviz/tag-recursive true}
+                         Gender
+                         [YES NO]
+
+                         ^{:union true
+                           :graphviz/tag-recursive true}
+                         GenderNode
+                         [GENDER NODE]])
+
 (def grouping-schema '[^{:graphviz/tag-recursive true
                          :graphviz/group "people"
                          :foo/tag true
@@ -41,6 +66,12 @@
 (deftest test-color
   (let [s-target (-> "color.dot" io/resource slurp)
         s-mine (-> color-schema engine/init-schema graphviz/schema)]
+    (is (= s-target s-mine))))
+
+(deftest test-stereotype
+  (let [s-target (-> "stereotype.dot" io/resource slurp)
+        s-mine (-> stereotype-schema engine/init-schema graphviz/schema)]
+    (println s-mine)
     (is (= s-target s-mine))))
 
 (deftest test-dpi

@@ -64,12 +64,14 @@
   (reduce (fn [acc {:keys [field/name]}] (str acc name "\\l")) "" fields))
 
 (defn ^:private node-content
-  [{:keys [type/name type/enum type/interface type/union field/_parent] :as t}]
+  [{:keys [type/name type/enum type/interface type/union field/_parent
+           graphviz/stereotype] :as t}]
   (cond
-    interface (str "\\<\\<interface\\>\\>\\n" name "|" (field-list _parent))
-    enum      (str "\\<\\<enum\\>\\>\\n" name "|" (value-list _parent))
-    union     (str "\\<\\<union\\>\\>\\n" name "|" (value-list _parent))
-    :else     (str name "|" (field-list _parent))))
+    interface  (str "\\<\\<interface\\>\\>\\n" name "|" (field-list _parent))
+    enum       (str "\\<\\<enum\\>\\>\\n" name "|" (value-list _parent))
+    union      (str "\\<\\<union\\>\\>\\n" name "|" (value-list _parent))
+    stereotype (str "\\<\\<" stereotype "\\>\\>\\n" name "|" (field-list _parent))
+    :else      (str name "|" (field-list _parent))))
 
 (defn ^:private node-color
   [{:keys [graphviz/color]}]

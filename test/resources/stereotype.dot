@@ -1,0 +1,27 @@
+digraph G {
+  fontname = "Bitstream Vera Sans"
+  fontsize = 8
+  dpi = 300
+
+  node [
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    shape = "record"
+  ]
+
+  edge [
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    arrowhead = "open"
+    labelangle = 45
+    labeldistance = 1.1
+  ]
+PersonEvent [label="{\<\<fact\>\>\nPersonEvent|name: String\l}";]
+Gender [label="{\<\<enum\>\>\nGender|YES\lNO\l}";]
+RetractionEvent [label="{\<\<command\>\>\nRetractionEvent|id: String\l}";]
+GenderNode [label="{\<\<union\>\>\nGenderNode|GENDER\lNODE\l}";]
+Node [label="{\<\<interface\>\>\nNode|id: String\l}";]
+GenderNode -> GENDER [label=" ";style=dashed;]
+GenderNode -> NODE [label=" ";style=dashed;]
+
+}

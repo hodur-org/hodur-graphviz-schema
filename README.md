@@ -57,7 +57,7 @@ GraphViz out of your model to the `deps.edn` file:
 
 ``` clojure
   {:deps {hodur/engine          {:mvn/version "0.1.7"}
-          hodur/graphviz-schema {:mvn/version "0.1.1"}}}
+          hodur/graphviz-schema {:mvn/version "0.1.2"}}}
 ```
 
 You should `require` it any way you see fit:
@@ -156,6 +156,24 @@ You can select the color of a specific entity by using the marker
 ```
 
 GraphViz colors can be [found here][graphviz-colors].
+
+## Providing Entities' Stereotypes
+
+A very useful pattern when modeling is indicating custom stereotypes
+for entities. These usually render with a `<<stereotype>>` marker.
+
+This Hodur GraphViz plugin uses stereotypes for interfaces
+(`<<interface>>`), enums (`<<enum>>`), and unions (`<<union>>`).
+
+If you want to provide your own stereotype for any other entity type
+than the ones mentioned above, use the marker `:graphviz/stereotype`:
+
+``` clojure
+  [^{:graphviz/tag-recursive true
+     :graphviz/stereotype "fact"}
+   PersonEvent
+   [^String name]]
+```
 
 ## Selectively Generating and Grouping
 
