@@ -1,9 +1,9 @@
 {:paths ["src" "resources"]
 
  :deps
- {org.clojure/clojure   {:mvn/version "1.10.1"}
-  hodur/engine           {:mvn/version "0.1.7"}
-  camel-snake-kebab     {:mvn/version "0.4.1"}}
+ {org.clojure/clojure                      {:mvn/version "1.10.3"}
+  hodur/engine                             {:mvn/version "0.1.8"}
+  camel-snake-kebab/camel-snake-kebab      {:mvn/version "0.4.2"}}
 
  :aliases
  {:dev
@@ -12,5 +12,5 @@
 
   :test
   {:extra-paths ["test" "test/resources"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "0.0-565"}}
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.972"}}
    :main-opts ["-m" "kaocha.runner"]}}}
