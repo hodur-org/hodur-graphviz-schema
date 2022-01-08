@@ -42,7 +42,7 @@
                          ^{:union true
                            :graphviz/tag-recursive true}
                          GenderNode
-                         [GENDER NODE]])
+                         [Gender Node]])
 
 (def grouping-schema '[^{:graphviz/tag-recursive true
                          :graphviz/group "people"
