@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>hodur</groupId>
   <artifactId>graphviz-schema</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <name>graphviz-schema</name>
   <dependencies>
     <dependency>
@@ -14,7 +14,7 @@
     <dependency>
       <groupId>hodur</groupId>
       <artifactId>engine</artifactId>
-      <version>0.1.8</version>
+      <version>0.1.9</version>
     </dependency>
     <dependency>
       <groupId>camel-snake-kebab</groupId>

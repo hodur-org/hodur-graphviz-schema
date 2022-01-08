@@ -57,8 +57,8 @@ add `hodur/graphviz-schema`, a plugin that creates diagrams in
 GraphViz out of your model to the `deps.edn` file:
 
 ``` clojure
-  {:deps {hodur/engine          {:mvn/version "0.1.7"}
-          hodur/graphviz-schema {:mvn/version "0.1.2"}}}
+  {:deps {hodur/engine          {:mvn/version "0.1.9"}
+          hodur/graphviz-schema {:mvn/version "0.1.3"}}}
 ```
 
 You should `require` it any way you see fit:
