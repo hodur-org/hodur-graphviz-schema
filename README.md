@@ -1,4 +1,5 @@
-[circleci-badge]: https://circleci.com/gh/hodur-org/hodur-graphviz-schema.svg?style=shield&circle-token=37f55808bf5f74cb45eed9b4424a3da74169b540
+[ci-badge]: https://github.com/hodur-org/hodur-graphviz-schema/actions/workflows/test.yml/badge.svg
+[ci-link]: https://github.com/hodur-org/hodur-graphviz-schema/actions/workflows/test.yml
 [circleci]: https://circleci.com/gh/hodur-org/hodur-graphviz-schema
 [clojars-badge]: https://img.shields.io/clojars/v/hodur/graphviz-schema.svg
 [clojars]: http://clojars.org/hodur/graphviz-schema
@@ -19,7 +20,7 @@
 
 # Hodur GraphViz Schema
 
-[![CircleCI][circleci-badge]][circleci]
+[![CI][ci-badge]][ci-link]
 [![Clojars][hodur-engine-clojars-badge]][hodur-engine-clojars]
 [![Clojars][clojars-badge]][clojars]
 [![License][license-badge]][license]
