@@ -1,8 +1,12 @@
 (ns core-test
   (:require [clojure.java.io :as io]
+            [clojure.string :as s]
             [clojure.test :refer :all]
-            [hodur-graphviz-schema.core :as graphviz]
-            [hodur-engine.core :as engine]))
+            [hodur-engine.core :as engine]
+            [hodur-graphviz-schema.core :as graphviz]))
+
+(defn win-cr-fix [x]
+  (s/replace x #"\r\n" "\n"))
 
 (def basic-schema '[^{:graphviz/tag-recursive true}
                     Person
@@ -59,32 +63,32 @@
                        [^String name]])
 
 (deftest test-basic
-  (let [s-target (-> "basic.dot" io/resource slurp)
+  (let [s-target (-> "basic.dot" io/resource slurp win-cr-fix)
         s-mine (-> basic-schema engine/init-schema graphviz/schema)]
     (is (= s-target s-mine))))
 
 (deftest test-color
-  (let [s-target (-> "color.dot" io/resource slurp)
+  (let [s-target (-> "color.dot" io/resource slurp win-cr-fix)
         s-mine (-> color-schema engine/init-schema graphviz/schema)]
     (is (= s-target s-mine))))
 
 (deftest test-stereotype
-  (let [s-target (-> "stereotype.dot" io/resource slurp)
+  (let [s-target (-> "stereotype.dot" io/resource slurp win-cr-fix)
         s-mine (-> stereotype-schema engine/init-schema graphviz/schema)]
     (println s-mine)
     (is (= s-target s-mine))))
 
 (deftest test-dpi
-  (let [s-target (-> "basic-150.dot" io/resource slurp)
+  (let [s-target (-> "basic-150.dot" io/resource slurp win-cr-fix)
         s-mine (-> basic-schema engine/init-schema (graphviz/schema {:dpi 150}))]
     (is (= s-target s-mine)))
-  (let [s-target (-> "basic-600.dot" io/resource slurp)
+  (let [s-target (-> "basic-600.dot" io/resource slurp win-cr-fix)
         s-mine (-> basic-schema engine/init-schema (graphviz/schema {:dpi 600}))]
     (is (= s-target s-mine))))
 
 (deftest test-grouping
   (are [dot filter-map]
-      (let [s-target (-> dot io/resource slurp)
+      (let [s-target (-> dot io/resource slurp win-cr-fix)
             s-mine (-> grouping-schema
                        engine/init-schema
                        (graphviz/schema filter-map))]
