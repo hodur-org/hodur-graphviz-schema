@@ -3,9 +3,9 @@
             [clojure.string :as string]
             [datascript.core :as d]))
 
-(def header (slurp (io/resource "header.dot")))
+(def header (-> "header.dot" io/resource slurp (string/replace #"\r\n" "\n")))
 
-(def footer (slurp (io/resource "footer.dot")))
+(def footer (-> "footer.dot" io/resource slurp (string/replace #"\r\n" "\n")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

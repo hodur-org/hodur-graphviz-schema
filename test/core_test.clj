@@ -5,7 +5,7 @@
             [hodur-engine.core :as engine]
             [hodur-graphviz-schema.core :as graphviz]))
 
-(defn win-cr-fix [x]
+(defn ^:private win-cr-fix [x]
   (s/replace x #"\r\n" "\n"))
 
 (def basic-schema '[^{:graphviz/tag-recursive true}
@@ -75,7 +75,6 @@
 (deftest test-stereotype
   (let [s-target (-> "stereotype.dot" io/resource slurp win-cr-fix)
         s-mine (-> stereotype-schema engine/init-schema graphviz/schema)]
-    (println s-mine)
     (is (= s-target s-mine))))
 
 (deftest test-dpi
